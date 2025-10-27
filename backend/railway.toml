@@ -1,0 +1,22 @@
+# Railway deployment configuration
+
+[service]
+name = "kayul-faucet-backend"
+startCommand = "npm start"
+
+[build]
+builder = "nixpacks"
+buildCommand = "npm install"
+
+[deploy]
+numReplicas = 1
+restartPolicyType = "on_failure"
+
+# Health check
+[service.healthCheck]
+path = "/health"
+initialDelay = 30
+timeout = 10
+interval = 60
+
+# Environment variables are set in Railway dashboard
